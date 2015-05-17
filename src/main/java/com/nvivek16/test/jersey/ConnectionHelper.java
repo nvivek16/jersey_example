@@ -1,31 +1,38 @@
 package com.nvivek16.test.jersey;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConnectionHelper {
-  private String url;
+  private static String url, username, password;
   private static ConnectionHelper instance;
   
-  private ConnectionHelper() {
-    try{
-      Class.forName("com.mysql.jdbc.Driver");
-    }
-    catch(ClassNotFoundException e){
-      e.printStackTrace();
-      return;
-    }
+  private ConnectionHelper() throws URISyntaxException {
+    System.out.print(System.getenv("DATABASE_URL"));
+    URI dbUri = new URI(System.getenv("DATABASE_URL"));
 
-    url = "jdbc:mysql://localhost:3306/jersey_example";
+    username = dbUri.getUserInfo().split(":")[0];
+    password = dbUri.getUserInfo().split(":")[1];
+    int port = dbUri.getPort();
+
+    url = "jdbc:postgresql://" + dbUri.getHost() + ":" + port + dbUri.getPath();
+
   }
   
   public static Connection getConnection() throws SQLException {
     if(instance == null){
-      instance = new ConnectionHelper();
+      try {
+        instance = new ConnectionHelper();
+      } catch (URISyntaxException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
     }
     try {
-      return DriverManager.getConnection(instance.url, "root", "");
+      return DriverManager.getConnection(url, username, password);
     }
     catch (SQLException e){
       throw e;
