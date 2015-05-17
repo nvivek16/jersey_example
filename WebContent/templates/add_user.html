@@ -1,0 +1,37 @@
+<form name="form" ng-submit="form.$valid && createNewUser(newUser)" novalidate="novalidate" class="form-horizontal clearfix">
+  <div class="control-group clearfix">
+    <label class="control-label pull-left" for="inputFirstName">First name</label>
+
+    <div class="controls pull-left">
+      <input type="text" name="uName" id="inputFirstName" ng-model="newUser.firstName" required="" />
+      <div ng-show="form.$submitted || form.uName.$touched">
+    	<div ng-show="form.uName.$error.required">Tell us your first name.</div>
+  	  </div>
+    </div>
+  </div>
+  <div class="control-group clearfix">
+    <label class="control-label pull-left" for="inputLastName">Last name</label>
+
+    <div class="controls pull-left">
+      <input type="text" name="lName" id="inputLastName" ng-model="newUser.lastName" required="" />
+      <div ng-show="form.$submitted || form.lName.$touched">
+    	<div ng-show="form.lName.$error.required">Tell us your last name.</div>
+  	  </div>
+    </div>
+  </div>
+  <div class="control-group clearfix">
+    <label class="control-label pull-left" for="email">Email</label>
+
+    <div class="controls pull-left">
+      <input type="text" name="email" id="email" ng-model="newUser.email" required="" />
+      <div ng-show="form.$submitted">
+    	<div ng-show="form.email.$error.required">Invalid email.</div>
+  	  </div>
+    </div>
+  </div>
+  <div class="control-group clearfix">
+    <div class="controls" style="width:30%;margin:auto">
+      <input type="submit" class="btn btn-small btn-primary" value="Save">
+    </div>
+  </div>
+</form>

@@ -1,0 +1,18 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th> Name </th>
+      <th> Email </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="user in users">
+      <td>{{user.name}}</td>
+      <td>{{user.email}}</td>
+      <td>
+        <button type="button" class="btn btn-primary btn-sm btn-custom pull-right" ng-click="deleteUser(user)">Delete</button>
+      	<button type="button" class="btn btn-primary btn-sm btn-custom pull-right" ng-click="openNewForm(user)">Edit</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
