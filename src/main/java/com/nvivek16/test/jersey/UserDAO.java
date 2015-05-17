@@ -11,7 +11,7 @@ public class UserDAO {
   public UserDAO(){
     // Create table
     Connection c = null;
-    String sql = "CREATE TABLE IF NOT EXISTS USERS (id INTEGER not NULL AUTO_INCREMENT, firstName VARCHAR(255), lastName VARCHAR(255), email VARCHAR(255), PRIMARY KEY (id))";
+    String sql = "CREATE TABLE IF NOT EXISTS USERS (id SERIAL not NULL, firstName VARCHAR(255), lastName VARCHAR(255), email VARCHAR(255),PRIMARY KEY (id))";
     try{
       c = ConnectionHelper.getConnection();
       Statement s = c.createStatement();
@@ -74,7 +74,7 @@ public class UserDAO {
     PreparedStatement ps = null;
     try{
       c = ConnectionHelper.getConnection();
-      ps = c.prepareStatement("INSERT INTO users (firstName, lastName, email) values (?, ?, ?)", new String[] {"ID"});
+      ps = c.prepareStatement("INSERT INTO users (firstName, lastName, email) values (?, ?, ?)", new String[] {"id"});
       ps.setString(1, user.getFirstName());
       ps.setString(2, user.getLastName());
       ps.setString(3, user.getEmail());
